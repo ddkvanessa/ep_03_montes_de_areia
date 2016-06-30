@@ -87,12 +87,39 @@ void copie_matriz(int origem[MAX][MAX], int destino[MAX][MAX], int nlin, int nco
 int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol, int instante, int *novosativados){
   int nl, nc;
   int matriz_temporaria[MAX][MAX];
+  int numero_vizinho = 0;
   copie_matriz(tabuleiro, matriz_temporaria, nlin, ncol);
-  for(nl = 0; nl < nlin; nl++)
-    for(nc = 0; nc < ncol; nc++)
-      
-}
+  for(nl = 0; nl < nlin; nl++){
+    for(nc = 0; nc < ncol; nc++){
+      /*conatndo o numero de vizinhos da tabuleiro*/
+      if(nl-1>0)
+        numero_vizinho = numero_vizinho + 1;
+      if(nl+1<nlin)
+        numero_vizinho = numero_vizinho + 1;
+      if(nc-1>0)
+        numero_vizinho = numero_vizinho + 1;
+      if(nc+1<ncol)
+        numero_vizinho = numero_vizinho + 1;
 
+      if(tabuleiro[nl][nc] >= numero_vizinho){
+        matriz_temporaria[nl][nc] = tabuleiro[nl][nc] - numero_vizinho;
+        if(nl-1>0)
+          matriz_temporaria[nl-1][nc] = tabuleiro[nl-1][nc] + 1;
+        if(nl+1>nlin)
+          matriz_temporaria[nl+1][nc] = tabuleiro[nl-1][nc] + 1;
+        if(nc-1>0)
+          matriz_temporaria[nl][nc-1] = tabuleiro[nl-1][nc] + 1;
+        if(nl+1>ncol)
+          matriz_temporaria[nl][nc+1] = tabuleiro[nl-1][nc] + 1;
+        ativacao[nl][nc]=instante;
+      }
+      else{
+        // estavel
+      }
+      }
+}
+  copie_matriz(matriz_temporaria, tabuleiro, nlin, ncol);
+}
 /*funcoes desenvolvidas*/
 void preenchido_menos_um(int menos_um[MAX][MAX], int nlin, int ncol){
   int nl, nc;
