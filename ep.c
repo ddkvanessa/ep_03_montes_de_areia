@@ -69,8 +69,6 @@ void imprima_tabuleiro(int tabuleiro[MAX][MAX], int nlin, int ncol){
         printf("\n\n");
 }
 
-int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol, int instante, int *novosativados);
-
 void copie_matriz(int origem[MAX][MAX], int destino[MAX][MAX], int nlin, int ncol){
   int nl, nc;
   for(nl = 0; nl < nlin; nl++)
@@ -79,15 +77,28 @@ void copie_matriz(int origem[MAX][MAX], int destino[MAX][MAX], int nlin, int nco
       printf("\n\n");
 }
 
+// Essa função corresponde ao mecanismo central do EP, e será a responsável pela
+// realização dos espalhamentos em cada instante. A matriz ativação (declarada na
+// função main e inicializada com -1's) deve registrar o instante em que cada
+// casa é ativada (fica instável) pela primeira vez. O parâmetro de saída novos
+// ativados deve indicar quantas casas ficaram instáveis pela primeira vez nesse
+// instante, e o valor de retorno da função é a quantidade total de casas
+// instáveis nesse instante.
+
+int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol, int instante, int *novosativados){
+
+}
+
 /*funcoes desenvolvidas*/
 /*aqui comeca o programa*/
 
 int main(){
-    int ncol, nlin, ne;
-    int tabuleiro[MAX][MAX];/*declaracao do tabuleiro_def ep*/
-    int destino_teste[MAX][MAX];/*declaracao do tabuleiro_def ep*/
+    int ncol, nlin, ne, instante;
+    int *novosativados;
+    int tabuleiro[MAX][MAX], ativacao[MAX][MAX];/*declaracao do tabuleiro_def ep*/
     leia_configuracao_inicial(tabuleiro, &nlin, &ncol);
     // ----------------------------------------------------------------------
+    espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
 
 
 
