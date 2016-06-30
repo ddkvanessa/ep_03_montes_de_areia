@@ -90,6 +90,12 @@ int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol,
 }
 
 /*funcoes desenvolvidas*/
+void preenchido_menos_um(int menos_um[MAX][MAX], int nlin, int ncol){
+  int nl, nc;
+  for(nl = 0; nl < nlin; nl++)
+    for(nc = 0; nc < ncol; nc++)
+      menos_um[nl][nc]= -1;
+}
 /*aqui comeca o programa*/
 
 int main(){
@@ -99,7 +105,6 @@ int main(){
     leia_configuracao_inicial(tabuleiro, &nlin, &ncol);
     // ----------------------------------------------------------------------
     espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
-
 
 
     return 0;
