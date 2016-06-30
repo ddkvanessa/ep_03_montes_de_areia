@@ -74,7 +74,6 @@ void copie_matriz(int origem[MAX][MAX], int destino[MAX][MAX], int nlin, int nco
   for(nl = 0; nl < nlin; nl++)
     for(nc = 0; nc < ncol; nc++)
       destino[nl][nc]=origem[nl][nc];
-      printf("\n\n");
 }
 
 // Essa função corresponde ao mecanismo central do EP, e será a responsável pela
@@ -86,7 +85,12 @@ void copie_matriz(int origem[MAX][MAX], int destino[MAX][MAX], int nlin, int nco
 // instáveis nesse instante.
 
 int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol, int instante, int *novosativados){
-
+  int nl, nc;
+  int matriz_temporaria[MAX][MAX];
+  copie_matriz(tabuleiro, matriz_temporaria, nlin, ncol);
+  for(nl = 0; nl < nlin; nl++)
+    for(nc = 0; nc < ncol; nc++)
+      
 }
 
 /*funcoes desenvolvidas*/
@@ -102,7 +106,9 @@ int main(){
     int ncol, nlin, ne, instante;
     int *novosativados;
     int tabuleiro[MAX][MAX], ativacao[MAX][MAX];/*declaracao do tabuleiro_def ep*/
+    zere_tabuleiro(tabuleiro, nlin, ncol);
     leia_configuracao_inicial(tabuleiro, &nlin, &ncol);
+    preenchido_menos_um(ativacao, nlin, ncol);
     // ----------------------------------------------------------------------
     espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
 
