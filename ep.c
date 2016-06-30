@@ -66,12 +66,18 @@ void imprima_tabuleiro(int tabuleiro[MAX][MAX], int nlin, int ncol){
             if(ncol == nc-1 && tabuleiro[nlin][ncol]/10 != 0)/*elementos da ponto direita e maiores que dez*/
                 printf("-%d--\n", tabuleiro[nlin][ncol]);
         }
-
+        printf("\n\n");
 }
 
 int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol, int instante, int *novosativados);
 
-void copie_matriz(int origem[MAX][MAX], int destino[MAX][MAX], int nlin, int ncol);
+void copie_matriz(int origem[MAX][MAX], int destino[MAX][MAX], int nlin, int ncol){
+  int nl, nc;
+  for(nl = 0; nl < nlin; nl++)
+    for(nc = 0; nc < ncol; nc++)
+      destino[nl][nc]=origem[nl][nc];
+      printf("\n\n");
+}
 
 /*funcoes desenvolvidas*/
 /*aqui comeca o programa*/
@@ -79,12 +85,11 @@ void copie_matriz(int origem[MAX][MAX], int destino[MAX][MAX], int nlin, int nco
 int main(){
     int ncol, nlin, ne;
     int tabuleiro[MAX][MAX];/*declaracao do tabuleiro_def ep*/
+    int destino_teste[MAX][MAX];/*declaracao do tabuleiro_def ep*/
     leia_configuracao_inicial(tabuleiro, &nlin, &ncol);
-    printf("\nfuncao de impressao do tabuleiro funciona:\n\n");
-    imprima_tabuleiro(tabuleiro, nlin, ncol);
-    printf("\nfuncao de zerar o tabuleiro:\n\n");
-    zere_tabuleiro(tabuleiro, nlin, ncol);
-    imprima_tabuleiro(tabuleiro, nlin, ncol);
+    // ----------------------------------------------------------------------
+
+
 
     return 0;
 }
