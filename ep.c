@@ -178,22 +178,11 @@ int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol,
       preenchido_menos_um(ativacao, nlin, ncol);
       // ----------------------------------------------------------------------
 
-      // for(instante = 0; instante>=0; instante++){
-      //   if(nao_infinito(ativacao, nlin, ncol) == 1)
-      //   break;
-      imprima_tabuleiro(tabuleiro,nlin,ncol);
-      espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
-            imprima_tabuleiro(tabuleiro,nlin,ncol);
-            espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
-              imprima_tabuleiro(tabuleiro,nlin,ncol);
-              espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
-                imprima_tabuleiro(tabuleiro,nlin,ncol);
-                espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
-
-
-
-      //
-      // }
+      for(instante = 0; instante>=0; instante++){
+        if(nao_infinito(ativacao, nlin, ncol) == 1)
+          break;
+        espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
+      }
 
 
       return 0;
