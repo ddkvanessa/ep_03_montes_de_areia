@@ -22,6 +22,7 @@
               tabuleiro[nl][nc] =0;
   }
 
+
   /*esta função deve ler os valores da entrada (como descrito na especificação da entrada) e inicializar
   o tabuleiro e as variáveis (externas) nlin e ncol com os valores correspondentes.*/
   void leia_configuracao_inicial(int tabuleiro[MAX][MAX], int *nlin, int *ncol){
@@ -84,12 +85,21 @@
   // instante, e o valor de retorno da função é a quantidade total de casas
   // instáveis nesse instante.
 
+  void soma_matriz(int a[MAX][MAX], int b[MAX][MAX], int nlin, int ncol){
+    int nl, nc;
+    for(nl = 0; nl < nlin; nl++)
+      for(nc = 0; nc < ncol; nc++)
+        a[nl][nc] += b[nl][nc];
+  }
+
+
 int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol, int instante, int *novosativados){
     int nl, nc, alterados_instante;
-    int matriz_temporaria[MAX][MAX];
+    int pontos[MAX][MAX];
+    zere_tabuleiro(pontos,nlin,ncol);
     int numero_vizinho = 0;
     *novosativados = 0;
-    copie_matriz(tabuleiro, matriz_temporaria, nlin, ncol);
+
     for(nl = 0; nl < nlin; nl++){
         for(nc = 0; nc < ncol; nc++){
             /*conatndo o numero de vizinhos da tabuleiro*/
@@ -109,25 +119,24 @@ int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol,
             }
 
             if(tabuleiro[nl][nc] >= numero_vizinho){
-              printf("tabuleiro\n");
-              imprima_tabuleiro(tabuleiro,nlin,ncol);
-              printf("matriz_temporaria\n");
-              imprima_tabuleiro(matriz_temporaria,nlin,ncol);
 
                 if(nl-1 >= 0){
-                  matriz_temporaria[nl-1][nc] = tabuleiro[nl-1][nc] + 1;
+                  pontos[nl][nc]--;
+                  pontos[nl-1][nc]++;
                 }
                 if(nl+1 < nlin){
-                  matriz_temporaria[nl+1][nc] = tabuleiro[nl+1][nc] + 1;
+                  pontos[nl][nc]--;
+                  pontos[nl+1][nc]++;
                 }
                 if(nc-1 >= 0){
-                  matriz_temporaria[nl][nc-1] = tabuleiro[nl][nc-1] + 1;
+                  pontos[nl][nc]--;
+                  pontos[nl][nc-1]++;
                 }
                 if(nc+1 < ncol){
-                  matriz_temporaria[nl][nc+1] = tabuleiro[nl][nc+1] + 1;
+                  pontos[nl][nc]--;
+                  pontos[nl][nc+1]++;
                 }
 
-                matriz_temporaria[nl][nc] = matriz_temporaria[nl][nc] - numero_vizinho;
 
                 if(ativacao[nl][nc] == -1){
                     novosativados = novosativados + 1;
@@ -139,7 +148,7 @@ int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol,
         }
     }
 
-    copie_matriz(matriz_temporaria, tabuleiro, nlin, ncol);
+    soma_matriz(tabuleiro,pontos,nl,nc);
     return alterados_instante;
 }
   /*funcoes desenvolvidas*/
@@ -172,15 +181,15 @@ int espalhe(int tabuleiro[MAX][MAX], int ativacao[MAX][MAX], int nlin, int ncol,
       // for(instante = 0; instante>=0; instante++){
       //   if(nao_infinito(ativacao, nlin, ncol) == 1)
       //   break;
-      espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
-
-      espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
-
       imprima_tabuleiro(tabuleiro,nlin,ncol);
       espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
+            imprima_tabuleiro(tabuleiro,nlin,ncol);
+            espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
+              imprima_tabuleiro(tabuleiro,nlin,ncol);
+              espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
+                imprima_tabuleiro(tabuleiro,nlin,ncol);
+                espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
 
-      imprima_tabuleiro(tabuleiro,nlin,ncol);
-      espalhe(tabuleiro, ativacao, nlin, ncol, instante, novosativados);
 
 
       //
